@@ -160,6 +160,10 @@ def main():
 
 def initialize(args):
 
+    # Check if outputfolder exists -> create if not.
+    if not os.path.isdir(OUTPUT):
+    	os.makedirs(OUTPUT)
+
     # Check if filetype specified.
     if not args.file.endswith(".csv"):
         print("Did you forget to specify filetype? Only .csv files are supported.")
