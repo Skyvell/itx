@@ -1,4 +1,3 @@
 data/itx.ini
-data/input/*
-data/output/*
+data/output/*.csv
 *.pyc
