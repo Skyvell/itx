@@ -1,0 +1,4 @@
+data/itx.ini
+data/input/*
+data/output/*
+*.pyc
