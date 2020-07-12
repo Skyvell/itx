@@ -62,34 +62,7 @@ The standard output directory for files is "./data/output/".
 To review your rules you can use the "status" command.
 ```
 python3 itx.py status
-
-Name              : delegations.csv
-Folder            : data/output/
-From              : No filter
-To                : cx0000000000000000000000000000000000000000
-Datatypes         : No filter
-Methods           : setDelegation
-Params            : No filter
-Include_failed_tx : False
-Columns           : block from to value datatype data txhash blocktimestamp
-Firstblock        : None
-Lastblock         : None
-Transactions      : 0
-
-Name              : irep.csv
-Folder            : data/output/
-From              : No filter
-To                : cx0000000000000000000000000000000000000000
-Datatypes         : No filter
-Methods           : setGovernanceVariables
-Params            : irep
-Include_failed_tx : False
-Columns           : block from to value datatype data txhash blocktimestamp
-Firstblock        : None
-Lastblock         : None
-Transactions      : 0
 ```
-Everything seems to be in order.
 
 #### 2. Extraction
 Next, we start the extraction. The following command tells the program to traverse blocks 11000000 - 20000000 and compare all transactions to the rules we specified. If a transaction matches the rules for a file, it is appended to that file.
