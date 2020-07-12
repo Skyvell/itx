@@ -49,20 +49,18 @@ commands:
 ```
 
 ## Example
-Imagine you would like to investigate if P-reps lowering their irep had an impact on the vote distribution. To do this, you would need all voting transactions, and all transactions where p-reps change their i-rep. In this example we will extract those transactions into two seperate .csv files.
+Imagine you would like to investigate if P-reps lowering their irep had an impact on the vote distribution. To do this, you would need all voting transactions and all transactions where p-reps change their i-rep. In this example we will extract those transactions into two seperate .csv files.
 
 #### 1. Initialize files
-First, we need to create the files and specify the extraction rules for each file. Line 1 tells the program to create delegations.csv in the "./data/output" directory and to only include transactions to "cx0000000000000000000000000000000000000000" with the method "setDelegation" into delegations.csv.
+First, we create the two files and specify the extraction rules for each file. 
 ```
 python3 itx.py init --to cx0000000000000000000000000000000000000000  --methods setDelegation --file delegations.csv
-```
-Simlilarly, line 2 creates irep.csv and tells the program to only include transactions which are to "cx0000000000000000000000000000000000000000" and has the method "setGovernanceVariables" and the parameter "irep" into irep.csv.
-``` 
 python3 itx.py init --to cx0000000000000000000000000000000000000000 --methods setGovernanceVariables --params irep --file irep.csv
 ```
+The standard output directory for files is ./data/output/
 
 #### 2. Extraction
-Next, we start the extraction. The following line tells the program to traverse blocks 11000000 - 20000000 and compare all transactions to the rules we specified. If a transaction matches the rules for a file, it is appended to that file.
+Next, we start the extraction. The following command tells the program to traverse blocks 11000000 - 20000000 and compare all transactions to the rules we specified. If a transaction matches the rules for a file, it is appended to that file.
 ```
 python3 itx.py extract --first-block 11000000 --last-block 20000000 --files delegations.csv irep.csv
 ```
@@ -75,6 +73,7 @@ python3 itx.py update --files delegations.csv irep.csv
 If you do not specify the option --last-block, the last available block in your local database will be the default.
 
 ## Limitations
+- You will need to turn off your node while you are extracting from it. Seems to be a limitation with leveldb.
 - If you wish to remove files -> use the remove command. Otherwise the configuration file won't be accurate.
 - If you wish to move files -> edit the configuration file accordingly. Otherwise you will break tracking of those files.
 
