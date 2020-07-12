@@ -57,7 +57,9 @@ First, we create the two files and specify the extraction rules for each file.
 python3 itx.py init --to cx0000000000000000000000000000000000000000  --methods setDelegation --file delegations.csv
 python3 itx.py init --to cx0000000000000000000000000000000000000000 --methods setGovernanceVariables --params irep --file irep.csv
 ```
-The standard output directory for files is "./data/output/". To review your rules you can use the "status" command.
+The standard output directory for files is "./data/output/". 
+
+To review your rules you can use the "status" command.
 ```
 python3 itx.py status
 
@@ -87,6 +89,7 @@ Firstblock        : None
 Lastblock         : None
 Transactions      : 0
 ```
+Everything seems to be in order.
 
 #### 2. Extraction
 Next, we start the extraction. The following command tells the program to traverse blocks 11000000 - 20000000 and compare all transactions to the rules we specified. If a transaction matches the rules for a file, it is appended to that file.
