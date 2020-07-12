@@ -156,11 +156,6 @@ class Transaction:
         else:
             raise Exception(f"{self.version} not handled by class.")
 
-        ## TODO
-        ## Need to find and read sourcecode/documentation
-        ## for how blockstructure and transactionstructure has changed for different versions.
-        ## Compare to current design.
-
     def convert_units(self) -> None:
         ##TODO
         pass
