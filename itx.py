@@ -77,6 +77,14 @@ def main():
     optional_init.add_argument('--columns', metavar = '<columns>', choices = COLUMNS, type = str, nargs = "+",
                                    help = 'Table structure in file.', default = COLUMNS)
 
+    optional_init.add_argument('--include-failed-transactions', action = 'store_true', dest = "include_failed_tx",
+                                help = "By default only successful transactions are extracted. "
+                                       "With this option there will be no test if transactions where successful or not. "
+                                       "Both successful and failed transactions will be included, "
+                                       "without a way to differetiate the two. "
+                                       "This option will increase the extraction speed by many factors if your rules "
+                                       "target many transactions.")
+
     parser_initialize.set_defaults(func = initialize)
 
     # Create parser for extract.
@@ -188,7 +196,7 @@ def initialize(args):
     # Initialize txfile with its extraction settings.
     txfile = TxFile(name = args.file, folder = OUTPUT, inifile = CONFIG, from_ = args.from_,
                     to = args.to, datatypes = args.datatypes, methods = args.methods, params = args.params,
-                    columns = args.columns)
+                    columns = args.columns, include_failed_tx = args.include_failed_tx)
    
     # Save settings to configuration file.
     txfile.delete_config()
@@ -241,12 +249,15 @@ def extract(args):
             for txfile in txfiles:    
                 if not transaction.fulfills_criteria(**txfile.rules):
                     continue
-                if not transaction.was_successful():
-                    continue
+
+                if not txfile.include_failed_tx:
+                    if not transaction.was_successful():
+                        continue
 
                 # Write to file if all tests passed
                 txfile.append_transaction(transaction.get_transaction())
                 txfile.transactions += 1
+        
         counter += 1
 
         if flag.exit():
@@ -309,10 +320,13 @@ def update(args):
             for txfile in txfiles:
                 if txfile.lastblock != lowest_blockheight:
                     continue
+                
                 if not transaction.fulfills_criteria(**txfile.rules):
                     continue
-                if not transaction.was_successful():
-                    continue
+
+                if not txfile.include_failed_tx:
+                    if not transaction.was_successful():
+                        continue
                 
                 txfile.append_transaction(transaction.get_transaction())
                 txfile.transactions += 1

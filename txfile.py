@@ -13,7 +13,7 @@ class TxFile:
     """
 
     def __init__(self, name = None, folder = None, inifile = None, from_ = [], to = [],
-                 datatypes = [], methods = [], params = [], columns = None, firstblock = None,
+                 datatypes = [], methods = [], params = [], include_failed_tx = False, columns = None, firstblock = None,
                  lastblock = None, transactions= 0):
         self.name = name
         self.folder = folder
@@ -23,6 +23,7 @@ class TxFile:
         self.datatypes = datatypes
         self.methods = methods
         self.params = params
+        self.include_failed_tx = include_failed_tx
         self.columns = columns
         self.firstblock = firstblock
         self.lastblock = lastblock
@@ -91,6 +92,8 @@ class TxFile:
             self.methods = json.loads(config[self.name]['methods'])
         if config.has_option(self.name, "params"):
             self.params = json.loads(config[self.name]['params'])
+        if config.has_option(self.name, "include_failed_tx"):
+            self.include_failed_tx = json.loads(config[self.name]['include_failed_tx'])
         
         # Load columns.
         if config.has_option(self.name, "columns"):
@@ -123,6 +126,7 @@ class TxFile:
         config[self.name]['datatypes'] = json.dumps(self.datatypes)
         config[self.name]['methods'] = json.dumps(self.methods)
         config[self.name]['params'] = json.dumps(self.params)
+        config[self.name]['include_failed_tx'] = json.dumps(self.include_failed_tx)
 
         # Save columns
         if self.columns:
@@ -242,36 +246,40 @@ class TxFile:
         sep = " "
         
         print("")
-        print(f"Name        : {self.name}")
-        print(f"Folder      : {self.folder}")
+        print(f"Name              : {self.name}")
+        print(f"Folder            : {self.folder}")
         if self.from_:
-            text = f"From        : {sep.join(self.from_)}"
+            text = f"From               : {sep.join(self.from_)}"
             text = wrapper.wrap(text)
             for line in text:
                 print(line)
         else:
-            print(f"From        : No filter")
+            print(f"From              : No filter")
         if self.to:
-            text = f"To          : {sep.join(self.to)}"
+            text = f"To                : {sep.join(self.to)}"
             text = wrapper.wrap(text)
             for line in text:
                 print(line)
         else:
-            print(f"To          : No filter")
+            print(f"To                : No filter")
         if self.datatypes:
-            print(f"Datatypes   : {sep.join(self.datatypes)}")
+            print(f"Datatypes         : {sep.join(self.datatypes)}")
         else:
-            print(f"Datatypes   : No filter")
+            print(f"Datatypes         : No filter")
         if self.methods:
-            print(f"Methods     : {sep.join(self.methods)}")
+            print(f"Methods           : {sep.join(self.methods)}")
         else:
-            print(f"Methods     : No filter")
+            print(f"Methods           : No filter")
         if self.params:
-            print(f"Params      : {sep.join(self.params)}")
+            print(f"Params            : {sep.join(self.params)}")
         else:
-            print(f"Params      : No filter")
+            print(f"Params            : No filter")
+        if self.include_failed_tx:
+            print(f"Include_failed_tx : True")
+        else:
+            print(f"Include_failed_tx : False")
         if self.columns:
-            print(f"Columns     : {sep.join(self.columns)}")
-        print(f"Firstblock  : {self.firstblock}")
-        print(f"Lastblock   : {self.lastblock}")
-        print(f"Transactions: {self.transactions}")
+            print(f"Columns           : {sep.join(self.columns)}")
+        print(f"Firstblock        : {self.firstblock}")
+        print(f"Lastblock         : {self.lastblock}")
+        print(f"Transactions      : {self.transactions}")

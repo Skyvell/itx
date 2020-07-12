@@ -52,7 +52,9 @@ class Transaction:
 
     def __init__(self, transaction: dict, db: Leveldb, blockheight = None, blocktimestamp = None) -> Transaction:
         self.db = db
-
+        self.tested = False
+        self.successful = None
+        
         # Set blockheight and block_timestamp.
         if blockheight:
             self.blockheight = blockheight
