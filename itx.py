@@ -202,6 +202,11 @@ def initialize(args):
 
 def extract(args):
 
+    # Ignore genesisblock.
+    if args.firstblock == 0:
+        args.firstblock = 1
+        print("- Genesisblock ignored.")
+
     # Open local blockchaindb.
     plyveldb = plyvel.DB(LEVELDB, create_if_missing = False)
     
@@ -216,13 +221,7 @@ def extract(args):
         txfiles.append(txfile)
 
     print("Extracting transactions...")
-    ## Ask if user wants to proceed with extraction.
-    #if proceed():
-    #    print("Extraction transactions...")
-    #else:
-    #    print("Exiting program...")
-    #    sys.exit(2)
-
+    
     # Extract all transactions form each block.
     loop_broken = False
     counter = -1
@@ -238,6 +237,7 @@ def extract(args):
         # Test each transaction against rules.
         for transaction in transactions:
             transaction = Transaction(transaction, plyveldb, blockheight = block.height, blocktimestamp = block.timestamp)
+            
             for txfile in txfiles:    
                 if not transaction.fulfills_criteria(**txfile.rules):
                     continue
@@ -264,8 +264,6 @@ def extract(args):
     
     if flag.exit():
         print("Exited gracefully.")
-    # Endreport
-    # endreport()
 
 def update(args):
 
