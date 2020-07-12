@@ -91,3 +91,7 @@ Follow the instruction on https://www.icondev.io/docs/quickstart. Note that a ci
 3. Paste the url into your browser or use a tool such as wget to download.
 
 4. Unpack the database.
+
+## Acknowledgements
+Inspiration gathered from Icon P-rep Yudus-lab's chainlytics framework: https://github.com/yudus-lab/chainalytic-framework
+He also provided valuable insight into how to pull data from a local node. Thank you.
