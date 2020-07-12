@@ -95,3 +95,6 @@ Follow the instruction on https://www.icondev.io/docs/quickstart. Note that a ci
 ## Acknowledgements
 Inspiration gathered from Icon P-rep Yudus-lab's chainlytics framework: https://github.com/yudus-lab/chainalytic-framework.
 He also provided valuable insight into how to pull data from a local node. Thank you.
+
+## Contact
+Feel free to reach out to me at tskyvell@gmail.com.
