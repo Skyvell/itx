@@ -17,7 +17,7 @@ from txfile import TxFile
 
 COLUMNS = ["block", "from", "to", "value", "datatype", "data", "txhash", "blocktimestamp"]
 INTERVAL = 30
-CONFIG = "./data/itx.ini"
+CONFIG = "./itx.ini"
 
 
 #Get default arguments from file.

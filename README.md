@@ -13,7 +13,7 @@ pip install -r requirements.txt
 ```
 
 ## Configuration
-Open data/itx.ini and specify where your local blockchain database is located with the leveldb option.
+Open ./itx.ini and specify where your local blockchain database is located with the leveldb option.
 
 ```
 [DEFAULT]
