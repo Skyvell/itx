@@ -78,7 +78,7 @@ def main():
     optional_init.add_argument('--params', metavar = '<paramaters>', type = str, nargs = "+", 
                                 help = 'Parameters in method call.', default = [])
 
-    optional_init.add_argument('--columns', metavar = '<columns>', choices = COLUMNS, type = str, nargs = "+",
+    optional_init.add_argument('--columns', choices = COLUMNS, type = str, nargs = "+",
                                    help = 'Table structure in file.', default = COLUMNS)
 
     optional_init.add_argument('--include-failed-transactions', action = 'store_true', dest = "include_failed_tx",
