@@ -60,10 +60,14 @@ def main():
                                 help = "Filename for transaction storage. Csv file.")
     
     optional_init.add_argument('--from', metavar = '<addr>', type = str, nargs = "+", dest = "from_",
-                                action = CustomAction1, help = "Sending addresses.", default = [])
+                                action = CustomAction1, default = [], 
+                                help = "Sending addresses. It's possible to give a .txt file as an argument to this option. "
+                                       "Each address should be on a new line.")
 
     optional_init.add_argument('--to', metavar = '<addr>', type = str, nargs = "+",
-                                action = CustomAction1, help = "Recieving addresses.", default = [])
+                                action = CustomAction1, default = [], 
+                                help = "Recieving addresses. It's possible to give a .txt file as an argument to this option. "
+                                       "Each address should be on a new line.")
 
     optional_init.add_argument('--datatypes', metavar = '<datatypes>', type=str,
                                 nargs = '+', help='Transaction datatypes.', default = [])
@@ -122,7 +126,7 @@ def main():
                                           add_help = True)
 
     parser_update.add_argument('--files', type = str, required = True, nargs = "+",
-                                help = "File to store extracted transactions in.")
+                                help = "Files to update.")
 
     parser_update.add_argument('--last-block', type = int, metavar = "<block>", dest = "lastblock",
                                 help = 'Update files up to this block.')    
