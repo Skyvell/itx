@@ -2,7 +2,7 @@
 This is a command line tool for traversing the blockchain and extracting transactions according to userspecified rules.
 
 ## Prerequisites
-- A local copy of Icon's blockchain (see the "Accuire a local copy of the blockchain database" section for instructions).
+- A local copy of Icon's blockchain (see the "Acquire a local copy of the blockchain database" section for instructions).
 - Program is only tested on Linux.
 
 ## Installation
@@ -82,7 +82,7 @@ If you do not specify the option --last-block, the last available block in your 
 - If you wish to remove files -> use the remove command. Otherwise the configuration file won't be accurate.
 - If you wish to move files -> edit the configuration file accordingly. Otherwise you will break tracking of those files.
 
-## Accuire a local copy of the blockchain database.
+## Acquire a local copy of the blockchain database.
 Here you have two options. Either set up a local citizen node or download a snapshot of the blockchain. The first option would be more suitable if you would like to keep your extracted transaction data up to date over time. The second option would suffice if you just want some transaction data up to the current point in time.
 
 #### Option 1 - run local citizen node
